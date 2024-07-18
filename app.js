@@ -32,8 +32,8 @@ app.use(mongoSanitize());
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-const dbUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
+const dburl = process.env.dburl;
+const dbUrl = dburl;
 const mongoose = require("mongoose");
 mongoose.connect(dbUrl);
 
@@ -145,7 +145,7 @@ app.use('/',userRoutes);
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/reviews', reviewRoutes);
 
-app.get('/yelpcamp', (req, res) => {
+app.get('/', (req, res) => {
     res.render('home')
 })
 
